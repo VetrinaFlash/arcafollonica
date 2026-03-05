@@ -3,84 +3,72 @@
 <head>
   <meta charset="utf-8"/>
   <meta name="viewport" content="width=device-width,initial-scale=1"/>
-  <title>L'Arca Follonica — Gusto e Vista Mare</title>
+  <title>L'Arca Follonica — Ristorante sul Mare</title>
+  
   <link rel="preconnect" href="https://fonts.googleapis.com"/>
-  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,500;1,300&family=Jost:wght@200;400;600&display=swap" rel="stylesheet"/>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;1,400&family=Jost:wght@300;400;500&display=swap" rel="stylesheet"/>
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"/>
 
   <style>
     :root {
-      --gold: #c9a84c; --dark: #070a13; --glass: rgba(255, 255, 255, 0.03);
-      --border: rgba(201, 168, 76, 0.15); --white: #f5f0e8;
+      --sky-light: #f0f8ff; 
+      --sky-mid: #bce3f2;   
+      --sky-deep: #005b96;  
+      --text-main: #0a192f; 
+      --text-muted: #4a5d73; 
+      --white: #ffffff;
     }
 
     * { margin: 0; padding: 0; box-sizing: border-box; }
-    body { font-family: 'Jost', sans-serif; background: var(--dark); color: var(--white); overflow-x: hidden; }
-
-    /* Navigazione Minimal */
-    .nav { position: fixed; top: 0; width: 100%; z-index: 1000; padding: 25px 0; transition: 0.4s; }
-    .nav.scrolled { background: rgba(7, 10, 19, 0.95); padding: 15px 0; border-bottom: 1px solid var(--border); }
-    .nav-inner { max-width: 1400px; margin: 0 auto; display: flex; align-items: center; justify-content: space-between; padding: 0 40px; }
-    .logo { font-family: 'Cormorant Garamond'; font-size: 1.8rem; color: var(--gold); font-weight: 500; }
-    .nav-links a { font-size: 0.7rem; letter-spacing: 2px; text-transform: uppercase; margin-left: 30px; opacity: 0.7; transition: 0.3s; }
-    .nav-links a:hover { opacity: 1; color: var(--gold); }
-
-    /* Hero con Mosaico Immagini */
-    .hero-mosaic { 
-      padding: 140px 0 80px; 
-      display: grid; 
-      grid-template-columns: 1.2fr 0.8fr; 
-      gap: 40px; 
-      max-width: 1400px; 
-      margin: 0 auto; 
-      align-items: center;
-      padding-left: 40px; padding-right: 40px;
+    
+    body { 
+      font-family: 'Jost', sans-serif; 
+      background-color: var(--sky-light);
+      background-image: radial-gradient(at 50% 0%, #ffffff 0px, transparent 75%);
+      color: var(--text-main); 
+      overflow-x: hidden; 
     }
 
-    .hero-text h1 { font-family: 'Cormorant Garamond'; font-size: clamp(3rem, 5vw, 5rem); line-height: 1; margin-bottom: 25px; }
-    .hero-text h1 span { color: var(--gold); font-style: italic; }
+    /* Navbar */
+    .nav { position: fixed; top: 0; width: 100%; z-index: 1000; padding: 20px 0; transition: all 0.3s ease; background: transparent; }
+    .nav.scrolled { background: rgba(255, 255, 255, 0.95); backdrop-filter: blur(10px); box-shadow: 0 4px 20px rgba(0, 91, 150, 0.08); padding: 15px 0; }
+    .nav-inner { max-width: 1200px; margin: 0 auto; display: flex; justify-content: space-between; align-items: center; padding: 0 30px; }
+    .logo { font-family: 'Cormorant Garamond', serif; font-size: 2.2rem; font-weight: 600; color: var(--sky-deep); text-decoration: none;}
+    .nav-links a { font-size: 0.85rem; text-transform: uppercase; letter-spacing: 2px; margin-left: 35px; color: var(--text-main); text-decoration: none; font-weight: 500; transition: color 0.3s; }
+    .nav-links a:hover { color: var(--sky-deep); }
 
-    .mosaic-grid {
-      display: grid;
-      grid-template-columns: repeat(2, 1fr);
-      gap: 15px;
-    }
-    .m-item { width: 100%; aspect-ratio: 1; overflow: hidden; border: 1px solid var(--border); }
-    .m-item img { width: 100%; height: 100%; object-fit: cover; transition: 0.8s transform; }
-    .m-item:hover img { transform: scale(1.1); }
-    .m-item.wide { grid-column: span 2; aspect-ratio: 2/1; }
+    /* Hero Section */
+    .hero { text-align: center; padding: 180px 20px 100px; max-width: 800px; margin: 0 auto; }
+    .hero p.subtitle { text-transform: uppercase; letter-spacing: 4px; font-size: 0.85rem; color: var(--sky-deep); margin-bottom: 20px; font-weight: 500; }
+    .hero h1 { font-family: 'Cormorant Garamond', serif; font-size: clamp(3rem, 6vw, 4.5rem); line-height: 1.1; margin-bottom: 30px; font-weight: 400; color: var(--text-main); }
+    .hero h1 span { font-style: italic; color: var(--sky-deep); }
+    .hero p.desc { font-size: 1.1rem; color: var(--text-muted); line-height: 1.8; margin-bottom: 40px; }
+    .btn-primary { display: inline-block; padding: 16px 40px; background: var(--sky-deep); color: var(--white); text-decoration: none; text-transform: uppercase; letter-spacing: 2px; font-size: 0.85rem; border-radius: 4px; transition: transform 0.3s, background 0.3s; box-shadow: 0 4px 15px rgba(0, 91, 150, 0.2); }
+    .btn-primary:hover { background: #004a7a; transform: translateY(-3px); }
 
-    /* Sezione Middle - Focus Immagini */
-    .img-showcase { padding: 100px 40px; max-width: 1400px; margin: 0 auto; }
-    .showcase-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; }
-    .showcase-card { position: relative; overflow: hidden; border-radius: 2px; }
-    .showcase-card img { width: 100%; aspect-ratio: 3/4; object-fit: cover; display: block; }
-    .showcase-overlay { 
-      position: absolute; inset: 0; background: rgba(7, 10, 19, 0.4); 
-      display: flex; align-items: flex-end; padding: 30px; opacity: 0; transition: 0.4s;
-    }
-    .showcase-card:hover .showcase-overlay { opacity: 1; }
+    /* Gallery Section */
+    .gallery-section { max-width: 1200px; margin: 0 auto 100px; padding: 0 30px; }
+    .gallery-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 15px; }
+    .gallery-item { position: relative; aspect-ratio: 1 / 1; overflow: hidden; border-radius: 8px; cursor: pointer; border: 1px solid var(--sky-mid); }
+    .gallery-item img { width: 100%; height: 100%; object-fit: cover; transition: transform 0.5s ease; }
+    .gallery-item:hover img { transform: scale(1.08); }
+    .gallery-overlay { position: absolute; inset: 0; background: rgba(0, 91, 150, 0.4); opacity: 0; transition: opacity 0.3s ease; display: flex; align-items: center; justify-content: center; }
+    .gallery-item:hover .gallery-overlay { opacity: 1; }
+    .gallery-overlay i { color: white; font-size: 2rem; }
 
-    /* CTA Menù - Immagine di sfondo contenuta */
-    .cta-section { 
-      background: var(--glass); border-top: 1px solid var(--border); border-bottom: 1px solid var(--border);
-      padding: 80px 40px; text-align: center; margin: 50px 0;
-    }
-    .btn-lux { 
-      display: inline-block; padding: 20px 50px; border: 1px solid var(--gold); 
-      color: var(--gold); font-size: 0.75rem; letter-spacing: 4px; text-transform: uppercase;
-      transition: 0.4s; margin-top: 30px;
-    }
-    .btn-lux:hover { background: var(--gold); color: var(--dark); }
+    /* Lightbox Modal */
+    .lightbox { position: fixed; inset: 0; background: rgba(10, 25, 47, 0.95); z-index: 2000; display: none; align-items: center; justify-content: center; opacity: 0; transition: opacity 0.3s ease; backdrop-filter: blur(5px); }
+    .lightbox.active { display: flex; opacity: 1; }
+    .lightbox img { max-width: 90%; max-height: 90vh; border-radius: 4px; box-shadow: 0 10px 30px rgba(0,0,0,0.5); }
+    .close-lightbox { position: absolute; top: 30px; right: 40px; color: white; font-size: 2.5rem; cursor: pointer; transition: color 0.3s; }
+    .close-lightbox:hover { color: var(--sky-mid); }
 
-    /* Footer Minimal */
-    footer { padding: 80px 40px; text-align: center; opacity: 0.6; font-size: 0.8rem; }
+    /* Footer */
+    footer { text-align: center; padding: 60px 20px; background: rgba(255,255,255,0.5); font-size: 0.9rem; color: var(--text-muted); border-top: 1px solid var(--sky-mid); }
 
-    /* Mobile */
-    @media (max-width: 900px) {
-      .hero-mosaic { grid-template-columns: 1fr; padding-top: 100px; }
-      .showcase-grid { grid-template-columns: 1fr; }
+    @media (max-width: 768px) {
       .nav-links { display: none; }
+      .gallery-grid { grid-template-columns: repeat(auto-fill, minmax(150px, 1fr)); gap: 10px; }
     }
   </style>
 </head>
@@ -88,65 +76,145 @@
 
   <nav class="nav" id="mainNav">
     <div class="nav-inner">
-      <div class="logo">L'Arca</div>
+      <a href="#" class="logo">L'Arca</a>
       <div class="nav-links">
-        <a href="#storia">Storia</a>
-        <a href="menu.html" style="color:var(--gold); font-weight: 600;">Menu Digitale</a>
-        <a href="#atmosfera">Atmosfera</a>
-        <a href="#contatti">Contatti</a>
+        <a href="#gallery">La Gallery</a>
+        <a href="menu.html" style="color: var(--sky-deep); font-weight: 600;">Il Menu</a>
       </div>
     </div>
   </nav>
 
-  <section class="hero-mosaic">
-    <div class="hero-text">
-      <p style="letter-spacing: 3px; color: var(--gold); font-size: 0.7rem; text-transform: uppercase; margin-bottom: 15px;">Follonica — Est. 1960</p>
-      <h1>L'emozione del mare<br>in un <span>Piatto</span>.</h1>
-      <p style="max-width: 450px; opacity: 0.7; margin-bottom: 35px;">Benvenuti sull'antica palafitta nel cuore del golfo. Qui, dove il Tirreno tocca la riva, la nostra cucina celebra ogni giorno la freschezza del mare.</p>
-      <a href="menu.html" class="btn-lux">Esplora il Menu</a>
+  <section class="hero">
+    <p class="subtitle">Dal 1960 a Follonica</p>
+    <h1>La vera essenza del<br>mare, <span>in tavola.</span></h1>
+    <p class="desc">Sospesi sull'acqua, nel cuore del golfo. L'Arca offre un'esperienza sensoriale unica dove il profumo del Tirreno si fonde con la freschezza dei nostri piatti.</p>
+    <a href="menu.html" class="btn-primary">Scopri il Menu</a>
+  </section>
+
+  <section class="gallery-section" id="gallery">
+    <div style="text-align: center; margin-bottom: 40px;">
+      <h2 style="font-family: 'Cormorant Garamond', serif; font-size: 2.5rem; font-weight: 400; color: var(--text-main);">I Nostri Scatti</h2>
     </div>
     
-    <div class="mosaic-grid">
-      <div class="m-item wide"><img src="images/pontile-tramonto-rosso.jpeg" alt="Tramonto"></div>
-      <div class="m-item"><img src="images/tavoli-mare.jpeg" alt="Tavoli"></div>
-      <div class="m-item"><img src="images/logo-larca.jpeg" alt="Dettaglio"></div>
+    <div class="gallery-grid">
+      
+      <div class="gallery-item" onclick="openLightbox('images/Ingresso 02.jpg')">
+        <img src="images/Ingresso 02.jpg" alt="Ingresso Il Pontile">
+        <div class="gallery-overlay"><i class="fa-solid fa-expand"></i></div>
+      </div>
+      <div class="gallery-item" onclick="openLightbox('images/Esterno 06.jpg')">
+        <img src="images/Esterno 06.jpg" alt="Esterno Spiaggia">
+        <div class="gallery-overlay"><i class="fa-solid fa-expand"></i></div>
+      </div>
+      <div class="gallery-item" onclick="openLightbox('images/WhatsApp Image 2026-03-02 at 18.37.44 (3).jpeg')">
+        <img src="images/WhatsApp Image 2026-03-02 at 18.37.44 (3).jpeg" alt="L'Arca dal mare">
+        <div class="gallery-overlay"><i class="fa-solid fa-expand"></i></div>
+      </div>
+      <div class="gallery-item" onclick="openLightbox('images/Esterno 07.jpg')">
+        <img src="images/Esterno 07.jpg" alt="Esterno Laterale">
+        <div class="gallery-overlay"><i class="fa-solid fa-expand"></i></div>
+      </div>
+
+      <div class="gallery-item" onclick="openLightbox('images/arca-ristorante-pranzo-mare.jpg')">
+        <img src="images/arca-ristorante-pranzo-mare.jpg" alt="Pranzo vista mare">
+        <div class="gallery-overlay"><i class="fa-solid fa-expand"></i></div>
+      </div>
+      <div class="gallery-item" onclick="openLightbox('images/Terrazza Mare 02.jpg')">
+        <img src="images/Terrazza Mare 02.jpg" alt="Terrazza di giorno">
+        <div class="gallery-overlay"><i class="fa-solid fa-expand"></i></div>
+      </div>
+      <div class="gallery-item" onclick="openLightbox('images/tavoli-mare.jpeg')">
+        <img src="images/tavoli-mare.jpeg" alt="Tavoli vista mare">
+        <div class="gallery-overlay"><i class="fa-solid fa-expand"></i></div>
+      </div>
+      <div class="gallery-item" onclick="openLightbox('images/WhatsApp Image 2026-03-02 at 18.37.44 (1).jpeg')">
+        <img src="images/WhatsApp Image 2026-03-02 at 18.37.44 (1).jpeg" alt="Ingresso L'Arca">
+        <div class="gallery-overlay"><i class="fa-solid fa-expand"></i></div>
+      </div>
+
+      <div class="gallery-item" onclick="openLightbox('images/logo-larca.jpeg')">
+        <img src="images/logo-larca.jpeg" alt="Dettaglio Logo">
+        <div class="gallery-overlay"><i class="fa-solid fa-expand"></i></div>
+      </div>
+      <div class="gallery-item" onclick="openLightbox('images/Artistica 04.jpg')">
+        <img src="images/Artistica 04.jpg" alt="Scatto Artistico 1">
+        <div class="gallery-overlay"><i class="fa-solid fa-expand"></i></div>
+      </div>
+      <div class="gallery-item" onclick="openLightbox('images/Artistica 05.jpg')">
+        <img src="images/Artistica 05.jpg" alt="Scatto Artistico 2">
+        <div class="gallery-overlay"><i class="fa-solid fa-expand"></i></div>
+      </div>
+      <div class="gallery-item" onclick="openLightbox('images/Artistica 06.jpg')">
+        <img src="images/Artistica 06.jpg" alt="Scatto Artistico 3">
+        <div class="gallery-overlay"><i class="fa-solid fa-expand"></i></div>
+      </div>
+
+      <div class="gallery-item" onclick="openLightbox('images/Terrazza Mare 10.jpg')">
+        <img src="images/Terrazza Mare 10.jpg" alt="Terrazza al tramonto">
+        <div class="gallery-overlay"><i class="fa-solid fa-expand"></i></div>
+      </div>
+      <div class="gallery-item" onclick="openLightbox('images/finestra.jpeg')">
+        <img src="images/finestra.jpeg" alt="Vista dalla finestra">
+        <div class="gallery-overlay"><i class="fa-solid fa-expand"></i></div>
+      </div>
+      <div class="gallery-item" onclick="openLightbox('images/pontile-tramonto-blu.jpeg')">
+        <img src="images/pontile-tramonto-blu.jpeg" alt="Tramonto blu">
+        <div class="gallery-overlay"><i class="fa-solid fa-expand"></i></div>
+      </div>
+      <div class="gallery-item" onclick="openLightbox('images/pontile-tramonto-rosso.jpeg')">
+        <img src="images/pontile-tramonto-rosso.jpeg" alt="Tramonto rosso">
+        <div class="gallery-overlay"><i class="fa-solid fa-expand"></i></div>
+      </div>
+
+      <div class="gallery-item" onclick="openLightbox('images/terrazza-sera.jpeg')">
+        <img src="images/terrazza-sera.jpeg" alt="Terrazza serale">
+        <div class="gallery-overlay"><i class="fa-solid fa-expand"></i></div>
+      </div>
+      <div class="gallery-item" onclick="openLightbox('images/arca-notte.jpeg')">
+        <img src="images/arca-notte.jpeg" alt="Ingresso di notte">
+        <div class="gallery-overlay"><i class="fa-solid fa-expand"></i></div>
+      </div>
+      <div class="gallery-item" onclick="openLightbox('images/Terrazza Mare 17.jpg')">
+        <img src="images/Terrazza Mare 17.jpg" alt="Terrazza di notte">
+        <div class="gallery-overlay"><i class="fa-solid fa-expand"></i></div>
+      </div>
+
     </div>
   </section>
 
-  <section class="img-showcase" id="atmosfera">
-    <div style="text-align: center; margin-bottom: 60px;">
-      <h2 style="font-family: 'Cormorant Garamond'; font-size: 3rem; font-weight: 300;">L'Atmosfera dell'Arca</h2>
-    </div>
-    <div class="showcase-grid">
-      <div class="showcase-card">
-        <img src="images/pontile-tramonto-blu.jpeg" alt="Blue Hour">
-        <div class="showcase-overlay"><span>L'Ora Blu</span></div>
-      </div>
-      <div class="showcase-card">
-        <img src="images/arca-notte.jpeg" alt="Arca Night">
-        <div class="showcase-overlay"><span>Serate Live</span></div>
-      </div>
-      <div class="showcase-card">
-        <img src="images/terrazza-sera.jpeg" alt="Terrazza">
-        <div class="showcase-overlay"><span>Vista Golfo</span></div>
-      </div>
-    </div>
-  </section>
+  <div class="lightbox" id="lightbox">
+    <i class="fa-solid fa-xmark close-lightbox" onclick="closeLightbox()"></i>
+    <img id="lightbox-img" src="" alt="Zoom Image">
+  </div>
 
-  <section class="cta-section">
-    <h2 style="font-family: 'Cormorant Garamond'; font-size: 2.5rem;">Pronto per la tua cena sul mare?</h2>
-    <p style="opacity: 0.6; margin-top: 10px;">Scopri i nostri piatti e prenota il tuo tavolo preferito.</p>
-    <a href="menu.html" class="btn-lux" style="background: var(--gold); color: var(--dark);">Vedi il Menu Digitale</a>
-  </section>
-
-  <footer id="contatti">
+  <footer>
     <p>L'ARCA FOLLONICA — LUNGOMARE ITALIA</p>
-    <p style="margin-top: 10px; color: var(--gold);">0566 40064</p>
+    <p style="margin-top: 10px; font-weight: 500; color: var(--sky-deep);">Tel. 0566 40064</p>
   </footer>
 
   <script>
+    // Navbar Scroll Effect
     window.addEventListener('scroll', () => {
       document.getElementById('mainNav').classList.toggle('scrolled', window.scrollY > 50);
+    });
+
+    // Lightbox Logic
+    function openLightbox(imageSrc) {
+      const lightbox = document.getElementById('lightbox');
+      const img = document.getElementById('lightbox-img');
+      const clickedImgSrc = event.currentTarget.querySelector('img').src;
+      img.src = clickedImgSrc; 
+      lightbox.classList.add('active');
+      document.body.style.overflow = 'hidden'; 
+    }
+
+    function closeLightbox() {
+      document.getElementById('lightbox').classList.remove('active');
+      document.body.style.overflow = 'auto'; 
+    }
+
+    document.getElementById('lightbox').addEventListener('click', function(e) {
+      if(e.target === this) closeLightbox();
     });
   </script>
 </body>

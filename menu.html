@@ -3,42 +3,87 @@
 <head>
   <meta charset="utf-8"/>
   <meta name="viewport" content="width=device-width,initial-scale=1"/>
-  <title>Menù Digitale — L'Arca Follonica</title>
+  <title>Il Menu — L'Arca Follonica</title>
+  
   <link rel="preconnect" href="https://fonts.googleapis.com"/>
-  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@300;500;600&family=Jost:wght@300;400;600&display=swap" rel="stylesheet"/>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;1,400&family=Jost:wght@300;400;500&display=swap" rel="stylesheet"/>
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"/>
 
   <style>
     :root {
-      --gold: #c9a84c; --dark: #070a13; --dark2: #0d121f;
-      --white: #f5f0e8; --border: rgba(201, 168, 76, 0.15);
+      /* Palette "Coastal Chic" più raffinata */
+      --sky-light: #f0f8ff; /* AliceBlue, leggerissimo e luminoso */
+      --sky-mid: #bce3f2;   /* Azzurro polvere per i bordi */
+      --sky-deep: #005b96;  /* Blu marino elegante per i testi importanti */
+      --text-main: #0a192f; /* Blu scurissimo quasi nero per i titoli */
+      --text-muted: #4a5d73; /* Grigio-blu per le descrizioni */
+      --white: #ffffff;
     }
+
     * { margin: 0; padding: 0; box-sizing: border-box; }
-    body { font-family: 'Jost', sans-serif; background: var(--dark); color: var(--white); line-height: 1.6; }
-    .menu-header { padding: 60px 25px 30px; text-align: center; background: linear-gradient(to bottom, #101628, var(--dark)); position: relative; }
-    .back-link { position: absolute; top: 30px; left: 25px; color: var(--gold); font-size: 0.8rem; text-transform: uppercase; letter-spacing: 2px; text-decoration: none; }
-    .menu-header h1 { font-family: 'Cormorant Garamond'; font-size: 3.5rem; color: var(--gold); font-weight: 300; }
-    .controls { max-width: 900px; margin: 0 auto 40px; padding: 0 25px; }
-    .search-box { background: var(--dark2); border: 1px solid var(--border); padding: 15px 25px; border-radius: 50px; display: flex; align-items: center; gap: 15px; margin-bottom: 25px; }
-    .search-box input { background: transparent; border: none; color: white; width: 100%; outline: none; font-size: 1rem; }
-    .categories { display: flex; gap: 10px; overflow-x: auto; padding-bottom: 15px; white-space: nowrap; scrollbar-width: none; }
-    .categories::-webkit-scrollbar { display: none; }
-    .cat-btn { background: transparent; border: 1px solid var(--border); color: var(--white); padding: 8px 20px; border-radius: 30px; font-size: 0.75rem; cursor: pointer; transition: 0.3s; text-transform: uppercase; letter-spacing: 1px; }
-    .cat-btn.active, .cat-btn:hover { background: var(--gold); color: var(--dark); border-color: var(--gold); }
-    .menu-container { max-width: 1200px; margin: 0 auto; padding: 0 25px 100px; }
-    .section-title { font-family: 'Cormorant Garamond'; font-size: 2.2rem; color: var(--gold); margin: 60px 0 30px; border-bottom: 1px solid var(--border); padding-bottom: 10px; text-transform: capitalize; }
-    .grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(320px, 1fr)); gap: 20px; }
-    .item-card { background: var(--dark2); padding: 22px; border-radius: 4px; border: 1px solid transparent; transition: 0.3s; display: flex; flex-direction: column; justify-content: space-between; }
-    .item-card:hover { border-color: var(--gold); transform: translateY(-3px); }
-    .item-top { display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 5px; }
-    .item-name { font-family: 'Cormorant Garamond'; font-size: 1.3rem; font-weight: 500; color: var(--white); flex: 1; padding-right: 15px; line-height: 1.2; }
-    .item-price { color: var(--gold); font-weight: 600; font-size: 1.1rem; white-space: nowrap; }
-    .item-desc { font-size: 0.8rem; color: #8a9bb8; font-weight: 300; font-style: italic; margin-top: 8px; }
-    .menu-footer { text-align: center; padding: 60px 25px; opacity: 0.6; font-size: 0.85rem; border-top: 1px solid var(--border); background: var(--dark2); }
     
-    @media (max-width: 600px) {
+    body { 
+      font-family: 'Jost', sans-serif; 
+      background-color: var(--sky-light);
+      background-image: radial-gradient(at 50% 0%, #ffffff 0px, transparent 75%);
+      color: var(--text-main); 
+      line-height: 1.6;
+    }
+
+    /* Header */
+    .menu-header { text-align: center; padding: 60px 20px 30px; position: relative; }
+    .back-link { position: absolute; top: 30px; left: 30px; color: var(--sky-deep); text-decoration: none; font-size: 0.85rem; text-transform: uppercase; letter-spacing: 2px; font-weight: 500; display: flex; align-items: center; gap: 8px;}
+    .back-link:hover { color: #0369a1; }
+    .menu-header h1 { font-family: 'Cormorant Garamond', serif; font-size: 3.5rem; font-weight: 400; color: var(--text-main); line-height: 1; margin-bottom: 10px;}
+    
+    /* Filtri e Ricerca */
+    .controls-wrapper { position: sticky; top: 0; background: rgba(240, 248, 255, 0.95); backdrop-filter: blur(10px); z-index: 100; padding: 20px 0; border-bottom: 1px solid rgba(0, 91, 150, 0.1); box-shadow: 0 4px 15px rgba(0,0,0,0.02);}
+    .controls { max-width: 900px; margin: 0 auto; padding: 0 20px; }
+    
+    .search-box { background: var(--white); border: 1px solid var(--sky-mid); padding: 12px 20px; border-radius: 30px; display: flex; align-items: center; gap: 12px; margin-bottom: 20px; max-width: 500px; margin-left: auto; margin-right: auto;}
+    .search-box input { border: none; outline: none; width: 100%; font-family: 'Jost', sans-serif; font-size: 1rem; background: transparent; color: var(--text-main);}
+    
+    /* Categorie modificate per andare a capo e mostrarsi tutte */
+    .categories { display: flex; flex-wrap: wrap; justify-content: center; gap: 10px; padding-bottom: 5px; }
+    .cat-btn { background: var(--white); border: 1px solid var(--sky-mid); color: var(--sky-deep); padding: 8px 18px; border-radius: 30px; font-size: 0.8rem; text-transform: uppercase; letter-spacing: 1px; cursor: pointer; transition: all 0.3s ease; font-weight: 500; box-shadow: 0 2px 5px rgba(0,0,0,0.02);}
+    .cat-btn.active, .cat-btn:hover { background: var(--sky-deep); color: var(--white); border-color: var(--sky-deep); box-shadow: 0 4px 10px rgba(0, 91, 150, 0.2);}
+
+    /* Layout Lista Menu a 2 colonne */
+    .menu-container { max-width: 1000px; margin: 0 auto; padding: 20px 20px 80px; }
+    
+    .category-section { margin-top: 60px; animation: fadeIn 0.5s ease; }
+    @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
+    
+    .section-title { font-family: 'Cormorant Garamond', serif; font-size: 2.5rem; font-weight: 400; color: var(--sky-deep); text-align: center; margin-bottom: 40px; position: relative; }
+    .section-title::after { content: ''; display: block; width: 60px; height: 1px; background: var(--sky-deep); margin: 15px auto 0; }
+
+    /* Modifica principale: Griglia a due colonne */
+    .menu-list { 
+      display: grid; 
+      grid-template-columns: repeat(2, 1fr); 
+      gap: 30px 40px; 
+    }
+    
+    .menu-item { display: flex; flex-direction: column; }
+    .item-header { display: flex; justify-content: space-between; align-items: baseline; margin-bottom: 5px; }
+    .item-name { font-family: 'Cormorant Garamond', serif; font-size: 1.35rem; font-weight: 600; color: var(--text-main); line-height: 1.2; padding-right: 10px; }
+    
+    .item-dots { flex-grow: 1; border-bottom: 1px dotted var(--sky-mid); margin: 0 10px; position: relative; top: -5px; }
+    
+    .item-price { font-size: 1.1rem; font-weight: 500; color: var(--sky-deep); white-space: nowrap; }
+    .item-desc { font-size: 0.95rem; color: var(--text-muted); font-style: italic; font-weight: 300; line-height: 1.4; }
+
+    /* Footer */
+    .menu-footer { text-align: center; padding: 50px 20px; font-size: 0.85rem; color: var(--text-muted); background: var(--white); border-top: 1px solid var(--sky-mid); }
+
+    /* Responsive per mobile: torna a 1 colonna */
+    @media (max-width: 768px) {
+      .menu-list { grid-template-columns: 1fr; gap: 25px; }
+      .item-header { flex-direction: column; align-items: flex-start; }
+      .item-dots { display: none; }
+      .item-price { margin-top: 4px; }
       .menu-header h1 { font-size: 2.8rem; }
-      .grid { grid-template-columns: 1fr; }
+      .back-link { top: 20px; left: 20px; }
     }
   </style>
 </head>
@@ -46,40 +91,30 @@
 
   <header class="menu-header">
     <a href="index.html" class="back-link"><i class="fa-solid fa-arrow-left"></i> Home</a>
-    <h1>Menù L'Arca</h1>
-    <p style="opacity: 0.6; font-size: 0.9rem; margin-top: 10px;">Tradizione di mare a Follonica</p>
+    <h1>La Carta</h1>
+    <p style="color: var(--text-muted); font-style: italic;">Tradizione di mare a Follonica</p>
   </header>
 
-  <div class="controls">
-    <div class="search-box">
-      <i class="fa-solid fa-magnifying-glass" style="color: var(--gold)"></i>
-      <input type="text" id="searchInput" placeholder="Cerca piatti o ingredienti (es. Vongole, Senza Glutine...)" onkeyup="filterMenu()">
-    </div>
-    <div class="categories">
-      <button class="cat-btn active" onclick="filterCat('all')">Tutti</button>
-      <button class="cat-btn" onclick="filterCat('Antipasti')">Antipasti</button>
-      <button class="cat-btn" onclick="filterCat('Primi')">Primi</button>
-      <button class="cat-btn" onclick="filterCat('Secondi')">Secondi</button>
-      <button class="cat-btn" onclick="filterCat('Pizze Rosse')">Pizze Rosse</button>
-      <button class="cat-btn" onclick="filterCat('Pizze Bianche')">Pizze Bianche</button>
-      <button class="cat-btn" onclick="filterCat('Contorni')">Contorni</button>
-      <button class="cat-btn" onclick="filterCat('Dolci')">Dolci</button>
-      <button class="cat-btn" onclick="filterCat('Vini')">Vini</button>
-      <button class="cat-btn" onclick="filterCat('Bevande')">Bar</button>
+  <div class="controls-wrapper">
+    <div class="controls">
+      <div class="search-box">
+        <i class="fa-solid fa-magnifying-glass" style="color: var(--sky-deep)"></i>
+        <input type="text" id="searchInput" placeholder="Cerca un piatto o un ingrediente..." onkeyup="filterMenu()">
+      </div>
+      <div class="categories" id="cat-container"></div>
     </div>
   </div>
 
   <main class="menu-container" id="menuContent"></main>
 
   <footer class="menu-footer">
-    <p><strong>Coperto e servizio: € 2,50</strong></p>
-    <p style="margin-top: 15px;">* Prodotto congelato all'origine.</p>
-    <p>Per informazioni su sostanze e allergeni è possibile consultare l'apposita documentazione che verrà fornita, a richiesta, dal personale di servizio.</p>
+    <p style="color: var(--text-main); font-weight: 500; margin-bottom: 10px;">Coperto e servizio: € 2,50</p>
+    <p>* Prodotto congelato all'origine in mancanza di pescato fresco.</p>
+    <p style="margin-top: 15px;">Per informazioni su sostanze e allergeni è possibile consultare l'apposita documentazione fornita dal personale.</p>
   </footer>
 
   <script>
     const fullMenu = [
-      // ANTIPASTI
       { cat: 'Antipasti', name: 'Nizzarda', price: '€ 13,00', desc: 'Pomodoro, tonno, capperi, uovo sodo, acciughe, olive e insalata' },
       { cat: 'Antipasti', name: 'Sautè di cozze', price: '€ 13,00', desc: 'Cozze fresche' },
       { cat: 'Antipasti', name: 'Misto Mare', price: '€ 15,00', desc: 'Cozze fresche, cocktail gamberi, alici' },
@@ -92,14 +127,12 @@
       { cat: 'Antipasti', name: 'Acciughe con burrata', price: '€ 15,00', desc: 'Acciughe fresche e burrata' },
       { cat: 'Antipasti', name: 'Moscardini in umido', price: '€ 15,00', desc: 'Moscardini stufati al pomodoro' },
 
-      // PRIMI PIATTI
       { cat: 'Primi', name: 'Spaghetti alla chitarra con vongole veraci', price: '€ 18,00', desc: 'Pasta fresca con vongole veraci' },
       { cat: 'Primi', name: 'Tagliolino allo scoglio', price: '€ 16,00', desc: 'Totani*, gamberetti*, cozze' },
       { cat: 'Primi', name: 'Gnocchetti ai crostacei', price: '€ 16,00', desc: 'Gamberi, pomodoro pachino, vongole e scampi' },
       { cat: 'Primi', name: 'Gnocchetti al pomodoro', price: '€ 10,00', desc: 'Gnocchi con salsa di pomodoro fresco' },
       { cat: 'Primi', name: 'Tortelli maremmani', price: '€ 15,00', desc: 'Al ragù oppure burro e salvia' },
 
-      // SECONDI PIATTI
       { cat: 'Secondi', name: 'Frittura di pesce', price: '€ 18,00', desc: 'Frittura di totani* e gamberetti*' },
       { cat: 'Secondi', name: 'Grigliata di gamberoni', price: '€ 18,00', desc: 'Gamberoni* alla griglia' },
       { cat: 'Secondi', name: 'Pesce fresco alla griglia', price: '€ 18,00', desc: 'Spigola o orata a vostra scelta' },
@@ -108,7 +141,6 @@
       { cat: 'Secondi', name: 'Grigliata mista di pesce', price: '€ 25,00', desc: 'Pesce fresco, trancio di spada*, calamaro*, gamberoni*' },
       { cat: 'Secondi', name: 'Tagliata di manzo', price: '€ 20,00', desc: 'Filetto di manzo con rucola e parmigiano' },
 
-      // CONTORNI ED INSALATE
       { cat: 'Contorni', name: 'Patate fritte', price: '€ 6,00', desc: 'Patatine fritte classiche*' },
       { cat: 'Contorni', name: 'Insalata mista', price: '€ 6,00', desc: 'Insalata verde, pomodori, carote' },
       { cat: 'Contorni', name: 'Insalata di pomodori', price: '€ 6,00', desc: 'Insalata di soli pomodori freschi' },
@@ -116,7 +148,6 @@
       { cat: 'Contorni', name: 'Verdure in tempura', price: '€ 7,00', desc: 'Verdure miste in pastella leggera' },
       { cat: 'Contorni', name: 'Carciofi fritti', price: '€ 7,00', desc: 'Carciofi* fritti croccanti' },
 
-      // PIZZE ROSSE
       { cat: 'Pizze Rosse', name: 'Margherita', price: '€ 8,00', desc: 'Pomodoro e mozzarella' },
       { cat: 'Pizze Rosse', name: 'Marinara', price: '€ 7,00', desc: 'Pomodoro, aglio e origano' },
       { cat: 'Pizze Rosse', name: 'Napoli', price: '€ 10,00', desc: 'Pomodoro, mozzarella, capperi e acciughe' },
@@ -128,14 +159,12 @@
       { cat: 'Pizze Rosse', name: 'Bufala', price: '€ 12,00', desc: 'Pomodoro, mozzarella di bufala' },
       { cat: 'Pizze Rosse', name: 'Wurstel e patatine', price: '€ 10,00', desc: 'Pomodoro, mozzarella, wurstel, patatine fritte*' },
 
-      // PIZZE BIANCHE
       { cat: 'Pizze Bianche', name: 'Schiaccino olio e sale', price: '€ 6,00', desc: 'Focaccia classica' },
       { cat: 'Pizze Bianche', name: 'Caprese', price: '€ 10,00', desc: 'Pomodoro a fette, mozzarella e basilico' },
       { cat: 'Pizze Bianche', name: 'Quattro formaggi', price: '€ 12,00', desc: 'Mozzarella, gorgonzola, mascarpone, sottiletta' },
       { cat: 'Pizze Bianche', name: 'Valdostana', price: '€ 12,00', desc: 'Mozzarella, prosciutto crudo' },
       { cat: 'Pizze Bianche', name: 'Vegetariana', price: '€ 12,00', desc: 'Mozzarella, zucchine, melanzane, pomodoro pachino' },
 
-      // DOLCI ARTIGIANALI
       { cat: 'Dolci', name: 'Crema di mascarpone', price: '€ 6,00', desc: 'Con lingue di gatto di nostra produzione' },
       { cat: 'Dolci', name: 'Torta della nonna', price: '€ 6,00', desc: 'Classica torta con crema e pinoli' },
       { cat: 'Dolci', name: 'Crema fredda al caffè', price: '€ 6,00', desc: 'Dessert fresco al cucchiaio' },
@@ -143,24 +172,33 @@
       { cat: 'Dolci', name: 'Sgroppino', price: '€ 6,00', desc: 'Sorbetto al limone con aggiunta di vodka' },
       { cat: 'Dolci', name: 'Cantucci e Vin Santo', price: '€ 6,00', desc: 'Il fine pasto toscano per eccellenza' },
 
-      // VINI E BEVANDE
       { cat: 'Vini', name: 'Vermentino Biologico Doc', price: '€ 18,00', desc: 'La Cura - Massa Marittima. Sentori dolci e piacevole freschezza' },
-      { cat: 'Vini', name: 'Vino della casa Trebbiano (Bianco)', price: 'Da € 4,00', desc: 'Bicchiere € 4 / Mezzo litro € 7 / 1 Litro € 12' },
+      { cat: 'Vini', name: 'Vino della casa Trebbiano', price: 'Da € 4,00', desc: 'Bicchiere € 4 / Mezzo litro € 7 / 1 Litro € 12' },
       { cat: 'Vini', name: 'Vino della casa Rosso', price: 'Da € 4,00', desc: 'Azienda La Cura. Bicchiere € 4 / Mezzo litro € 7 / 1 Litro € 12' },
+      
       { cat: 'Bevande', name: 'Birra alla spina (40cl)', price: '€ 5,00', desc: 'Lowenbrau pils' },
       { cat: 'Bevande', name: 'Birra in bottiglia (33 cl)', price: '€ 5,00', desc: 'Corona, Leffe, Hoegaarden, Ichnusa, Beck\'s Zero' },
-      { cat: 'Bevande', name: 'Bevande in lattina (33 cl)', price: '€ 3,50', desc: 'Coca Cola, Fanta, Sprite, The, Succhi' },
+      { cat: 'Bevande', name: 'Bevande in lattina', price: '€ 3,50', desc: 'Coca Cola, Fanta, Sprite, The, Succhi' },
       { cat: 'Bevande', name: 'Acqua', price: '€ 2,50', desc: 'Naturale o gassata (75 cl)' },
       { cat: 'Bevande', name: 'Caffè', price: '€ 2,00', desc: 'Espresso' },
       { cat: 'Bevande', name: 'Grappa', price: 'Da € 4,00', desc: 'Grappa € 4,00 / Grappa barricata € 7,00' },
       { cat: 'Bevande', name: 'Amari e Superalcolici', price: 'Da € 5,00', desc: 'Amari € 5,00 / Superalcolici € 7,00' }
     ];
 
+    const order = ['Antipasti', 'Primi', 'Secondi', 'Pizze Rosse', 'Pizze Bianche', 'Contorni', 'Dolci', 'Vini', 'Bevande'];
+
+    function initMenu() {
+      const catContainer = document.getElementById('cat-container');
+      catContainer.innerHTML = `<button class="cat-btn active" onclick="filterCat('all')">Tutti</button>`;
+      order.forEach(cat => {
+        catContainer.innerHTML += `<button class="cat-btn" onclick="filterCat('${cat}')">${cat}</button>`;
+      });
+      renderMenu(fullMenu);
+    }
+
     function renderMenu(items) {
       const container = document.getElementById('menuContent');
       container.innerHTML = '';
-      
-      const order = ['Antipasti', 'Primi', 'Secondi', 'Pizze Rosse', 'Pizze Bianche', 'Contorni', 'Dolci', 'Vini', 'Bevande'];
       
       const grouped = items.reduce((acc, obj) => {
         acc[obj.cat] = acc[obj.cat] || [];
@@ -170,17 +208,20 @@
 
       order.forEach(cat => {
         if (grouped[cat] && grouped[cat].length > 0) {
-          let section = `<section id="${cat.replace(/\s+/g, '-').toLowerCase()}">
+          let section = `<section class="category-section" id="${cat.replace(/\s+/g, '-').toLowerCase()}">
                           <h2 class="section-title">${cat}</h2>
-                          <div class="grid">`;
+                          <div class="menu-list">`;
           grouped[cat].forEach(item => {
-            section += `<div class="item-card">
-                          <div class="item-top">
-                            <h3 class="item-name">${item.name}</h3>
-                            <span class="item-price">${item.price}</span>
-                          </div>
-                          <p class="item-desc">${item.desc}</p>
-                        </div>`;
+            section += `
+              <div class="menu-item">
+                <div class="item-header">
+                  <span class="item-name">${item.name}</span>
+                  <div class="item-dots"></div>
+                  <span class="item-price">${item.price}</span>
+                </div>
+                <p class="item-desc">${item.desc}</p>
+              </div>
+            `;
           });
           section += `</div></section>`;
           container.innerHTML += section;
@@ -198,10 +239,13 @@
         b.classList.toggle('active', b.innerText.toLowerCase() === cat.toLowerCase() || (cat === 'all' && b.innerText === 'TUTTI'));
       });
       renderMenu(cat === 'all' ? fullMenu : fullMenu.filter(i => i.cat === cat));
+      
+      if (cat !== 'all') {
+         window.scrollTo({ top: document.querySelector('.controls-wrapper').offsetTop, behavior: 'smooth' });
+      }
     }
 
-    // Init
-    renderMenu(fullMenu);
+    initMenu();
   </script>
 </body>
 </html>
