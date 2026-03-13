@@ -1,251 +1,754 @@
 <!doctype html>
 <html lang="it">
-<head>
-  <meta charset="utf-8"/>
-  <meta name="viewport" content="width=device-width,initial-scale=1"/>
-  <title>Il Menu — L'Arca Follonica</title>
-  
-  <link rel="preconnect" href="https://fonts.googleapis.com"/>
-  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;1,400&family=Jost:wght@300;400;500&display=swap" rel="stylesheet"/>
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"/>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Menu — L'Arca note blu</title>
 
-  <style>
-    :root {
-      /* Palette "Coastal Chic" più raffinata */
-      --sky-light: #f0f8ff; /* AliceBlue, leggerissimo e luminoso */
-      --sky-mid: #bce3f2;   /* Azzurro polvere per i bordi */
-      --sky-deep: #005b96;  /* Blu marino elegante per i testi importanti */
-      --text-main: #0a192f; /* Blu scurissimo quasi nero per i titoli */
-      --text-muted: #4a5d73; /* Grigio-blu per le descrizioni */
-      --white: #ffffff;
-    }
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600;700&family=Jost:wght@300;400;500;600&display=swap"
+      rel="stylesheet"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css"
+    />
 
-    * { margin: 0; padding: 0; box-sizing: border-box; }
-    
-    body { 
-      font-family: 'Jost', sans-serif; 
-      background-color: var(--sky-light);
-      background-image: radial-gradient(at 50% 0%, #ffffff 0px, transparent 75%);
-      color: var(--text-main); 
-      line-height: 1.6;
-    }
-
-    /* Header */
-    .menu-header { text-align: center; padding: 60px 20px 30px; position: relative; }
-    .back-link { position: absolute; top: 30px; left: 30px; color: var(--sky-deep); text-decoration: none; font-size: 0.85rem; text-transform: uppercase; letter-spacing: 2px; font-weight: 500; display: flex; align-items: center; gap: 8px;}
-    .back-link:hover { color: #0369a1; }
-    .menu-header h1 { font-family: 'Cormorant Garamond', serif; font-size: 3.5rem; font-weight: 400; color: var(--text-main); line-height: 1; margin-bottom: 10px;}
-    
-    /* Filtri e Ricerca */
-    .controls-wrapper { position: sticky; top: 0; background: rgba(240, 248, 255, 0.95); backdrop-filter: blur(10px); z-index: 100; padding: 20px 0; border-bottom: 1px solid rgba(0, 91, 150, 0.1); box-shadow: 0 4px 15px rgba(0,0,0,0.02);}
-    .controls { max-width: 900px; margin: 0 auto; padding: 0 20px; }
-    
-    .search-box { background: var(--white); border: 1px solid var(--sky-mid); padding: 12px 20px; border-radius: 30px; display: flex; align-items: center; gap: 12px; margin-bottom: 20px; max-width: 500px; margin-left: auto; margin-right: auto;}
-    .search-box input { border: none; outline: none; width: 100%; font-family: 'Jost', sans-serif; font-size: 1rem; background: transparent; color: var(--text-main);}
-    
-    /* Categorie modificate per andare a capo e mostrarsi tutte */
-    .categories { display: flex; flex-wrap: wrap; justify-content: center; gap: 10px; padding-bottom: 5px; }
-    .cat-btn { background: var(--white); border: 1px solid var(--sky-mid); color: var(--sky-deep); padding: 8px 18px; border-radius: 30px; font-size: 0.8rem; text-transform: uppercase; letter-spacing: 1px; cursor: pointer; transition: all 0.3s ease; font-weight: 500; box-shadow: 0 2px 5px rgba(0,0,0,0.02);}
-    .cat-btn.active, .cat-btn:hover { background: var(--sky-deep); color: var(--white); border-color: var(--sky-deep); box-shadow: 0 4px 10px rgba(0, 91, 150, 0.2);}
-
-    /* Layout Lista Menu a 2 colonne */
-    .menu-container { max-width: 1000px; margin: 0 auto; padding: 20px 20px 80px; }
-    
-    .category-section { margin-top: 60px; animation: fadeIn 0.5s ease; }
-    @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
-    
-    .section-title { font-family: 'Cormorant Garamond', serif; font-size: 2.5rem; font-weight: 400; color: var(--sky-deep); text-align: center; margin-bottom: 40px; position: relative; }
-    .section-title::after { content: ''; display: block; width: 60px; height: 1px; background: var(--sky-deep); margin: 15px auto 0; }
-
-    /* Modifica principale: Griglia a due colonne */
-    .menu-list { 
-      display: grid; 
-      grid-template-columns: repeat(2, 1fr); 
-      gap: 30px 40px; 
-    }
-    
-    .menu-item { display: flex; flex-direction: column; }
-    .item-header { display: flex; justify-content: space-between; align-items: baseline; margin-bottom: 5px; }
-    .item-name { font-family: 'Cormorant Garamond', serif; font-size: 1.35rem; font-weight: 600; color: var(--text-main); line-height: 1.2; padding-right: 10px; }
-    
-    .item-dots { flex-grow: 1; border-bottom: 1px dotted var(--sky-mid); margin: 0 10px; position: relative; top: -5px; }
-    
-    .item-price { font-size: 1.1rem; font-weight: 500; color: var(--sky-deep); white-space: nowrap; }
-    .item-desc { font-size: 0.95rem; color: var(--text-muted); font-style: italic; font-weight: 300; line-height: 1.4; }
-
-    /* Footer */
-    .menu-footer { text-align: center; padding: 50px 20px; font-size: 0.85rem; color: var(--text-muted); background: var(--white); border-top: 1px solid var(--sky-mid); }
-
-    /* Responsive per mobile: torna a 1 colonna */
-    @media (max-width: 768px) {
-      .menu-list { grid-template-columns: 1fr; gap: 25px; }
-      .item-header { flex-direction: column; align-items: flex-start; }
-      .item-dots { display: none; }
-      .item-price { margin-top: 4px; }
-      .menu-header h1 { font-size: 2.8rem; }
-      .back-link { top: 20px; left: 20px; }
-    }
-  </style>
-</head>
-<body>
-
-  <header class="menu-header">
-    <a href="index.html" class="back-link"><i class="fa-solid fa-arrow-left"></i> Home</a>
-    <h1>La Carta</h1>
-    <p style="color: var(--text-muted); font-style: italic;">Tradizione di mare a Follonica</p>
-  </header>
-
-  <div class="controls-wrapper">
-    <div class="controls">
-      <div class="search-box">
-        <i class="fa-solid fa-magnifying-glass" style="color: var(--sky-deep)"></i>
-        <input type="text" id="searchInput" placeholder="Cerca un piatto o un ingrediente..." onkeyup="filterMenu()">
-      </div>
-      <div class="categories" id="cat-container"></div>
-    </div>
-  </div>
-
-  <main class="menu-container" id="menuContent"></main>
-
-  <footer class="menu-footer">
-    <p style="color: var(--text-main); font-weight: 500; margin-bottom: 10px;">Coperto e servizio: € 2,50</p>
-    <p>* Prodotto congelato all'origine in mancanza di pescato fresco.</p>
-    <p style="margin-top: 15px;">Per informazioni su sostanze e allergeni è possibile consultare l'apposita documentazione fornita dal personale.</p>
-  </footer>
-
-  <script>
-    const fullMenu = [
-      { cat: 'Antipasti', name: 'Nizzarda', price: '€ 13,00', desc: 'Pomodoro, tonno, capperi, uovo sodo, acciughe, olive e insalata' },
-      { cat: 'Antipasti', name: 'Sautè di cozze', price: '€ 13,00', desc: 'Cozze fresche' },
-      { cat: 'Antipasti', name: 'Misto Mare', price: '€ 15,00', desc: 'Cozze fresche, cocktail gamberi, alici' },
-      { cat: 'Antipasti', name: 'Insalata di mare tiepida', price: '€ 15,00', desc: 'Insalata di mare calda' },
-      { cat: 'Antipasti', name: 'Tris di carpacci', price: '€ 14,00', desc: 'Carpaccio di tonno, salmone e spada' },
-      { cat: 'Antipasti', name: 'Tagliere toscano', price: '€ 15,00', desc: 'Affettati e formaggi misti' },
-      { cat: 'Antipasti', name: 'Antipasto caprese', price: '€ 12,00', desc: 'Mozzarella di Bufala e pomodori' },
-      { cat: 'Antipasti', name: 'Cocktail di gamberi', price: '€ 12,00', desc: 'Gamberetti in salsa rosa' },
-      { cat: 'Antipasti', name: 'Alici alla povera', price: '€ 12,00', desc: 'Alici con cipolla' },
-      { cat: 'Antipasti', name: 'Acciughe con burrata', price: '€ 15,00', desc: 'Acciughe fresche e burrata' },
-      { cat: 'Antipasti', name: 'Moscardini in umido', price: '€ 15,00', desc: 'Moscardini stufati al pomodoro' },
-
-      { cat: 'Primi', name: 'Spaghetti alla chitarra con vongole veraci', price: '€ 18,00', desc: 'Pasta fresca con vongole veraci' },
-      { cat: 'Primi', name: 'Tagliolino allo scoglio', price: '€ 16,00', desc: 'Totani*, gamberetti*, cozze' },
-      { cat: 'Primi', name: 'Gnocchetti ai crostacei', price: '€ 16,00', desc: 'Gamberi, pomodoro pachino, vongole e scampi' },
-      { cat: 'Primi', name: 'Gnocchetti al pomodoro', price: '€ 10,00', desc: 'Gnocchi con salsa di pomodoro fresco' },
-      { cat: 'Primi', name: 'Tortelli maremmani', price: '€ 15,00', desc: 'Al ragù oppure burro e salvia' },
-
-      { cat: 'Secondi', name: 'Frittura di pesce', price: '€ 18,00', desc: 'Frittura di totani* e gamberetti*' },
-      { cat: 'Secondi', name: 'Grigliata di gamberoni', price: '€ 18,00', desc: 'Gamberoni* alla griglia' },
-      { cat: 'Secondi', name: 'Pesce fresco alla griglia', price: '€ 18,00', desc: 'Spigola o orata a vostra scelta' },
-      { cat: 'Secondi', name: 'Calamaro alla griglia', price: '€ 16,00', desc: 'Calamaro* arrostito' },
-      { cat: 'Secondi', name: 'Pesce spada alla griglia', price: '€ 18,00', desc: 'Trancio di spada*' },
-      { cat: 'Secondi', name: 'Grigliata mista di pesce', price: '€ 25,00', desc: 'Pesce fresco, trancio di spada*, calamaro*, gamberoni*' },
-      { cat: 'Secondi', name: 'Tagliata di manzo', price: '€ 20,00', desc: 'Filetto di manzo con rucola e parmigiano' },
-
-      { cat: 'Contorni', name: 'Patate fritte', price: '€ 6,00', desc: 'Patatine fritte classiche*' },
-      { cat: 'Contorni', name: 'Insalata mista', price: '€ 6,00', desc: 'Insalata verde, pomodori, carote' },
-      { cat: 'Contorni', name: 'Insalata di pomodori', price: '€ 6,00', desc: 'Insalata di soli pomodori freschi' },
-      { cat: 'Contorni', name: 'Finocchi agli agrumi', price: '€ 6,00', desc: 'Insalata fresca di finocchi e agrumi' },
-      { cat: 'Contorni', name: 'Verdure in tempura', price: '€ 7,00', desc: 'Verdure miste in pastella leggera' },
-      { cat: 'Contorni', name: 'Carciofi fritti', price: '€ 7,00', desc: 'Carciofi* fritti croccanti' },
-
-      { cat: 'Pizze Rosse', name: 'Margherita', price: '€ 8,00', desc: 'Pomodoro e mozzarella' },
-      { cat: 'Pizze Rosse', name: 'Marinara', price: '€ 7,00', desc: 'Pomodoro, aglio e origano' },
-      { cat: 'Pizze Rosse', name: 'Napoli', price: '€ 10,00', desc: 'Pomodoro, mozzarella, capperi e acciughe' },
-      { cat: 'Pizze Rosse', name: '4 stagioni', price: '€ 12,00', desc: 'Pom., mozz., funghi, prosciutto cotto, carciofini e olive' },
-      { cat: 'Pizze Rosse', name: 'Diavola', price: '€ 10,00', desc: 'Pomodoro, mozzarella, salamino piccante' },
-      { cat: 'Pizze Rosse', name: 'Cotto e funghi', price: '€ 10,00', desc: 'Pomodoro, mozzarella, funghi, prosciutto cotto' },
-      { cat: 'Pizze Rosse', name: 'Salsiccia', price: '€ 10,00', desc: 'Pomodoro, mozzarella, salsiccia' },
-      { cat: 'Pizze Rosse', name: 'Tonno e cipolla', price: '€ 10,00', desc: 'Pomodoro, mozzarella, tonno e cipolla' },
-      { cat: 'Pizze Rosse', name: 'Bufala', price: '€ 12,00', desc: 'Pomodoro, mozzarella di bufala' },
-      { cat: 'Pizze Rosse', name: 'Wurstel e patatine', price: '€ 10,00', desc: 'Pomodoro, mozzarella, wurstel, patatine fritte*' },
-
-      { cat: 'Pizze Bianche', name: 'Schiaccino olio e sale', price: '€ 6,00', desc: 'Focaccia classica' },
-      { cat: 'Pizze Bianche', name: 'Caprese', price: '€ 10,00', desc: 'Pomodoro a fette, mozzarella e basilico' },
-      { cat: 'Pizze Bianche', name: 'Quattro formaggi', price: '€ 12,00', desc: 'Mozzarella, gorgonzola, mascarpone, sottiletta' },
-      { cat: 'Pizze Bianche', name: 'Valdostana', price: '€ 12,00', desc: 'Mozzarella, prosciutto crudo' },
-      { cat: 'Pizze Bianche', name: 'Vegetariana', price: '€ 12,00', desc: 'Mozzarella, zucchine, melanzane, pomodoro pachino' },
-
-      { cat: 'Dolci', name: 'Crema di mascarpone', price: '€ 6,00', desc: 'Con lingue di gatto di nostra produzione' },
-      { cat: 'Dolci', name: 'Torta della nonna', price: '€ 6,00', desc: 'Classica torta con crema e pinoli' },
-      { cat: 'Dolci', name: 'Crema fredda al caffè', price: '€ 6,00', desc: 'Dessert fresco al cucchiaio' },
-      { cat: 'Dolci', name: 'Sorbetto al limone', price: '€ 5,00', desc: 'Classico e rinfrescante' },
-      { cat: 'Dolci', name: 'Sgroppino', price: '€ 6,00', desc: 'Sorbetto al limone con aggiunta di vodka' },
-      { cat: 'Dolci', name: 'Cantucci e Vin Santo', price: '€ 6,00', desc: 'Il fine pasto toscano per eccellenza' },
-
-      { cat: 'Vini', name: 'Vermentino Biologico Doc', price: '€ 18,00', desc: 'La Cura - Massa Marittima. Sentori dolci e piacevole freschezza' },
-      { cat: 'Vini', name: 'Vino della casa Trebbiano', price: 'Da € 4,00', desc: 'Bicchiere € 4 / Mezzo litro € 7 / 1 Litro € 12' },
-      { cat: 'Vini', name: 'Vino della casa Rosso', price: 'Da € 4,00', desc: 'Azienda La Cura. Bicchiere € 4 / Mezzo litro € 7 / 1 Litro € 12' },
-      
-      { cat: 'Bevande', name: 'Birra alla spina (40cl)', price: '€ 5,00', desc: 'Lowenbrau pils' },
-      { cat: 'Bevande', name: 'Birra in bottiglia (33 cl)', price: '€ 5,00', desc: 'Corona, Leffe, Hoegaarden, Ichnusa, Beck\'s Zero' },
-      { cat: 'Bevande', name: 'Bevande in lattina', price: '€ 3,50', desc: 'Coca Cola, Fanta, Sprite, The, Succhi' },
-      { cat: 'Bevande', name: 'Acqua', price: '€ 2,50', desc: 'Naturale o gassata (75 cl)' },
-      { cat: 'Bevande', name: 'Caffè', price: '€ 2,00', desc: 'Espresso' },
-      { cat: 'Bevande', name: 'Grappa', price: 'Da € 4,00', desc: 'Grappa € 4,00 / Grappa barricata € 7,00' },
-      { cat: 'Bevande', name: 'Amari e Superalcolici', price: 'Da € 5,00', desc: 'Amari € 5,00 / Superalcolici € 7,00' }
-    ];
-
-    const order = ['Antipasti', 'Primi', 'Secondi', 'Pizze Rosse', 'Pizze Bianche', 'Contorni', 'Dolci', 'Vini', 'Bevande'];
-
-    function initMenu() {
-      const catContainer = document.getElementById('cat-container');
-      catContainer.innerHTML = `<button class="cat-btn active" onclick="filterCat('all')">Tutti</button>`;
-      order.forEach(cat => {
-        catContainer.innerHTML += `<button class="cat-btn" onclick="filterCat('${cat}')">${cat}</button>`;
-      });
-      renderMenu(fullMenu);
-    }
-
-    function renderMenu(items) {
-      const container = document.getElementById('menuContent');
-      container.innerHTML = '';
-      
-      const grouped = items.reduce((acc, obj) => {
-        acc[obj.cat] = acc[obj.cat] || [];
-        acc[obj.cat].push(obj);
-        return acc;
-      }, {});
-
-      order.forEach(cat => {
-        if (grouped[cat] && grouped[cat].length > 0) {
-          let section = `<section class="category-section" id="${cat.replace(/\s+/g, '-').toLowerCase()}">
-                          <h2 class="section-title">${cat}</h2>
-                          <div class="menu-list">`;
-          grouped[cat].forEach(item => {
-            section += `
-              <div class="menu-item">
-                <div class="item-header">
-                  <span class="item-name">${item.name}</span>
-                  <div class="item-dots"></div>
-                  <span class="item-price">${item.price}</span>
-                </div>
-                <p class="item-desc">${item.desc}</p>
-              </div>
-            `;
-          });
-          section += `</div></section>`;
-          container.innerHTML += section;
-        }
-      });
-    }
-
-    function filterMenu() {
-      const s = document.getElementById('searchInput').value.toLowerCase();
-      renderMenu(fullMenu.filter(i => i.name.toLowerCase().includes(s) || i.desc.toLowerCase().includes(s)));
-    }
-
-    function filterCat(cat) {
-      document.querySelectorAll('.cat-btn').forEach(b => {
-        b.classList.toggle('active', b.innerText.toLowerCase() === cat.toLowerCase() || (cat === 'all' && b.innerText === 'TUTTI'));
-      });
-      renderMenu(cat === 'all' ? fullMenu : fullMenu.filter(i => i.cat === cat));
-      
-      if (cat !== 'all') {
-         window.scrollTo({ top: document.querySelector('.controls-wrapper').offsetTop, behavior: 'smooth' });
+    <style>
+      :root {
+        --brand: #2475a6;
+        --brand-dark: #1d5f87;
+        --brand-soft: #7ccfe0;
+        --ink: #121723;
+        --muted: #5b6574;
+        --paper: rgba(255, 255, 255, 0.8);
+        --paper-strong: rgba(255, 255, 255, 0.92);
+        --line: rgba(36, 117, 166, 0.16);
+        --line-strong: rgba(36, 117, 166, 0.34);
+        --shadow: 0 18px 48px rgba(30, 71, 98, 0.1);
+        --radius-xl: 30px;
+        --radius-lg: 24px;
+        --radius-md: 18px;
+        --container: 1200px;
       }
-    }
 
-    initMenu();
-  </script>
-</body>
+      * {
+        box-sizing: border-box;
+      }
+
+      html {
+        scroll-behavior: smooth;
+      }
+
+      body {
+        margin: 0;
+        min-width: 320px;
+        font-family: 'Jost', sans-serif;
+        color: var(--ink);
+        line-height: 1.58;
+        background:
+          radial-gradient(circle at 8% 11%, rgba(124, 207, 224, 0.28) 0 3px, transparent 4px),
+          radial-gradient(circle at 84% 10%, rgba(124, 207, 224, 0.25) 0 4px, transparent 5px),
+          radial-gradient(circle at 89% 36%, rgba(124, 207, 224, 0.2) 0 5px, transparent 6px),
+          radial-gradient(circle at 15% 69%, rgba(124, 207, 224, 0.22) 0 5px, transparent 6px),
+          radial-gradient(circle at 78% 88%, rgba(124, 207, 224, 0.18) 0 6px, transparent 7px),
+          radial-gradient(ellipse at top left, rgba(189, 237, 242, 0.64) 0%, transparent 34%),
+          radial-gradient(ellipse at bottom right, rgba(174, 227, 236, 0.56) 0%, transparent 38%),
+          linear-gradient(180deg, #fdfefe 0%, #f4fafc 100%);
+      }
+
+      body::before,
+      body::after {
+        content: '';
+        position: fixed;
+        inset: 0;
+        z-index: -2;
+        pointer-events: none;
+      }
+
+      body::before {
+        background:
+          radial-gradient(circle at 6% 86%, rgba(80, 190, 214, 0.12) 0 130px, transparent 140px),
+          radial-gradient(circle at 94% 24%, rgba(80, 190, 214, 0.09) 0 170px, transparent 180px),
+          radial-gradient(circle at 77% 97%, rgba(80, 190, 214, 0.08) 0 120px, transparent 130px);
+        filter: blur(8px);
+      }
+
+      body::after {
+        z-index: -1;
+        opacity: 0.42;
+        background-image:
+          url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1600 1600'%3E%3Cg fill='none' stroke='%23566666' stroke-opacity='.22' stroke-width='2.1' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M72 96c44 24 72 61 84 111'/%3E%3Cpath d='M88 60c6 33 7 63 4 92'/%3E%3Cpath d='M128 44c-24 24-41 52-52 84'/%3E%3Cpath d='M1498 118c-37-21-72-26-111-15 36 11 64 30 84 58-34-7-61-5-88 8 26 6 45 16 64 34'/%3E%3Ccircle cx='1472' cy='112' r='38'/%3E%3Cpath d='M132 1452c22-29 30-60 28-95 16 21 28 44 34 69 11-27 29-50 52-69'/%3E%3Cpath d='M1452 1454c-18-37-44-67-79-89 10 31 12 58 5 89-16-17-35-29-58-37 18 23 28 49 31 81'/%3E%3Cpath d='M1360 1394c27 5 48 18 64 38'/%3E%3Cpath d='M1328 1454c16-18 35-29 59-35'/%3E%3C/g%3E%3C/svg%3E");
+        background-size: cover;
+      }
+
+      .shell {
+        width: min(calc(100% - 28px), var(--container));
+        margin: 0 auto;
+      }
+
+      .topbar {
+        position: sticky;
+        top: 0;
+        z-index: 100;
+        background: rgba(247, 251, 253, 0.74);
+        backdrop-filter: blur(14px);
+        border-bottom: 1px solid rgba(36, 117, 166, 0.08);
+      }
+
+      .topbar-inner {
+        min-height: 82px;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 14px;
+      }
+
+      .back-link,
+      .home-link {
+        display: inline-flex;
+        align-items: center;
+        gap: 10px;
+        text-decoration: none;
+        color: var(--brand-dark);
+        padding: 12px 16px;
+        border-radius: 999px;
+        font-weight: 600;
+        font-size: 0.92rem;
+      }
+
+      .back-link:hover,
+      .home-link:hover,
+      .back-link:focus-visible,
+      .home-link:focus-visible {
+        background: rgba(36, 117, 166, 0.08);
+        outline: none;
+      }
+
+      .glass-card {
+        background: var(--paper);
+        border: 1px solid rgba(255, 255, 255, 0.82);
+        box-shadow: var(--shadow);
+        border-radius: var(--radius-xl);
+        backdrop-filter: blur(14px);
+      }
+
+      .menu-hero {
+        padding: 28px 0 16px;
+      }
+
+      .menu-hero-card {
+        position: relative;
+        overflow: hidden;
+        padding: 28px;
+        display: grid;
+        grid-template-columns: auto minmax(0, 1fr);
+        gap: 22px;
+        align-items: center;
+      }
+
+      .menu-hero-card::before {
+        content: '';
+        position: absolute;
+        top: -110px;
+        right: -100px;
+        width: 260px;
+        height: 260px;
+        border-radius: 50%;
+        background: radial-gradient(circle, rgba(36, 117, 166, 0.1) 0%, transparent 72%);
+      }
+
+      .logo-mark {
+        width: 116px;
+        height: 116px;
+        flex: 0 0 auto;
+      }
+
+      .menu-heading h1 {
+        margin: 0 0 8px;
+        font-family: 'Cormorant Garamond', serif;
+        color: var(--brand);
+        font-size: clamp(2.9rem, 6vw, 4.8rem);
+        line-height: 0.92;
+      }
+
+      .menu-heading p {
+        margin: 0;
+        color: var(--muted);
+        max-width: 64ch;
+        line-height: 1.76;
+      }
+
+      .mini-meta {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 10px;
+        margin-top: 16px;
+      }
+
+      .mini-meta span {
+        display: inline-flex;
+        align-items: center;
+        gap: 8px;
+        padding: 10px 14px;
+        border-radius: 999px;
+        background: rgba(255, 255, 255, 0.76);
+        border: 1px solid rgba(36, 117, 166, 0.1);
+        color: var(--brand-dark);
+        font-size: 0.86rem;
+        font-weight: 500;
+      }
+
+      .controls-wrap {
+        position: sticky;
+        top: 82px;
+        z-index: 90;
+        padding: 8px 0 0;
+      }
+
+      .controls-card {
+        padding: 18px;
+      }
+
+      .search-box {
+        display: flex;
+        align-items: center;
+        gap: 12px;
+        min-height: 56px;
+        padding: 0 18px;
+        border-radius: 999px;
+        background: rgba(255, 255, 255, 0.88);
+        border: 1px solid rgba(36, 117, 166, 0.16);
+      }
+
+      .search-box i {
+        color: var(--brand);
+      }
+
+      .search-box input {
+        width: 100%;
+        border: 0;
+        outline: none;
+        background: transparent;
+        font: inherit;
+        color: var(--ink);
+      }
+
+      .categories {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 10px;
+        margin-top: 14px;
+      }
+
+      .cat-btn {
+        border: 1px solid rgba(36, 117, 166, 0.16);
+        background: rgba(255, 255, 255, 0.76);
+        color: var(--brand-dark);
+        border-radius: 999px;
+        min-height: 44px;
+        padding: 10px 16px;
+        font: inherit;
+        font-size: 0.86rem;
+        font-weight: 600;
+        cursor: pointer;
+        transition: background 0.22s ease, color 0.22s ease, border-color 0.22s ease;
+      }
+
+      .cat-btn:hover,
+      .cat-btn:focus-visible,
+      .cat-btn.active {
+        background: var(--brand);
+        color: #ffffff;
+        border-color: var(--brand);
+        outline: none;
+      }
+
+      .menu-shell {
+        padding: 20px 0 28px;
+      }
+
+      .menu-section {
+        padding: 24px;
+        margin-bottom: 18px;
+      }
+
+      .section-title {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 18px;
+        margin: 0 0 20px;
+        font-family: 'Cormorant Garamond', serif;
+        color: var(--brand);
+        font-size: clamp(2rem, 4vw, 3rem);
+        line-height: 1;
+      }
+
+      .section-title::after {
+        content: '';
+        flex: 1;
+        height: 1px;
+        background: linear-gradient(90deg, rgba(36, 117, 166, 0.34), transparent);
+      }
+
+      .menu-grid {
+        display: grid;
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        gap: 16px 24px;
+      }
+
+      .menu-item {
+        padding: 16px 18px;
+        border-radius: 18px;
+        background: rgba(255, 255, 255, 0.62);
+        border: 1px solid rgba(36, 117, 166, 0.08);
+      }
+
+      .item-head {
+        display: flex;
+        align-items: baseline;
+        gap: 10px;
+        margin-bottom: 6px;
+      }
+
+      .item-name {
+        font-size: 1.16rem;
+        font-weight: 600;
+        line-height: 1.25;
+      }
+
+      .item-dots {
+        flex: 1;
+        min-width: 10px;
+        border-bottom: 1px dotted rgba(36, 117, 166, 0.28);
+        transform: translateY(-2px);
+      }
+
+      .item-price {
+        white-space: nowrap;
+        color: var(--brand-dark);
+        font-size: 1.04rem;
+        font-weight: 700;
+      }
+
+      .item-desc {
+        margin: 0;
+        color: var(--muted);
+        font-size: 0.95rem;
+        line-height: 1.62;
+      }
+
+      .section-note {
+        margin-top: 10px;
+        color: var(--muted);
+        font-size: 0.92rem;
+        font-style: italic;
+      }
+
+      .empty-state {
+        padding: 30px 20px;
+        text-align: center;
+        color: var(--muted);
+      }
+
+      .footer {
+        padding: 0 0 34px;
+      }
+
+      .footer-card {
+        padding: 22px 24px;
+        display: grid;
+        grid-template-columns: 1fr auto;
+        gap: 20px;
+        align-items: center;
+      }
+
+      .footer-note strong {
+        display: block;
+        margin-bottom: 6px;
+        color: var(--ink);
+      }
+
+      .footer-note {
+        color: var(--muted);
+      }
+
+      .footer-extra {
+        display: inline-flex;
+        align-items: center;
+        gap: 10px;
+        padding: 14px 18px;
+        border-radius: 999px;
+        background: rgba(255, 255, 255, 0.76);
+        border: 1px solid rgba(36, 117, 166, 0.12);
+        color: var(--brand-dark);
+        text-decoration: none;
+        font-weight: 600;
+      }
+
+      @media (max-width: 980px) {
+        .menu-grid,
+        .footer-card {
+          grid-template-columns: 1fr;
+        }
+      }
+
+      @media (max-width: 760px) {
+        .shell {
+          width: min(calc(100% - 18px), var(--container));
+        }
+
+        .topbar-inner {
+          min-height: 72px;
+          padding: 8px 0;
+          flex-wrap: wrap;
+          justify-content: flex-start;
+        }
+
+        .menu-hero-card {
+          grid-template-columns: 1fr;
+          padding: 22px;
+        }
+
+        .logo-mark {
+          width: 100px;
+          height: 100px;
+        }
+
+        .controls-wrap {
+          top: 82px;
+        }
+
+        .item-head {
+          flex-wrap: wrap;
+        }
+
+        .item-dots {
+          display: none;
+        }
+      }
+
+      @media (max-width: 520px) {
+        .controls-card,
+        .menu-section,
+        .footer-card {
+          padding: 18px;
+        }
+
+        .mini-meta {
+          gap: 8px;
+        }
+
+        .mini-meta span,
+        .cat-btn {
+          font-size: 0.8rem;
+        }
+
+        .search-box {
+          min-height: 52px;
+          padding: 0 14px;
+        }
+
+        .item-name {
+          width: 100%;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <header class="topbar">
+      <div class="shell topbar-inner">
+        <a class="back-link" href="index.html">
+          <i class="fa-solid fa-arrow-left"></i>
+          Torna alla home
+        </a>
+        <a class="home-link" href="#menuContent">
+          <i class="fa-solid fa-utensils"></i>
+          Scorri il menu
+        </a>
+      </div>
+    </header>
+
+    <main>
+      <section class="menu-hero">
+        <div class="shell menu-hero-card glass-card">
+          <svg class="logo-mark" viewBox="0 0 220 220" aria-hidden="true">
+            <circle cx="110" cy="110" r="104" fill="#2475a6" />
+            <text
+              x="62"
+              y="34"
+              fill="#ffffff"
+              font-size="70"
+              font-weight="700"
+              font-family="Jost, Arial, sans-serif"
+              letter-spacing="2"
+              text-anchor="middle"
+              transform="rotate(-90 62 34)"
+            >
+              L'ARCA
+            </text>
+            <text
+              x="122"
+              y="105"
+              fill="#ffffff"
+              font-size="42"
+              font-style="italic"
+              font-family="Cormorant Garamond, serif"
+            >
+              note
+            </text>
+            <line x1="94" y1="115" x2="188" y2="115" stroke="#ffffff" stroke-width="3.6" />
+            <text
+              x="134"
+              y="135"
+              fill="#ffffff"
+              font-size="56"
+              font-style="italic"
+              font-family="Cormorant Garamond, serif"
+            >
+              blu
+            </text>
+          </svg>
+
+          <div class="menu-heading">
+            <h1>La Carta</h1>
+            <p>
+              Menu aggiornato sul nuovo cartaceo che hai allegato, con impaginazione premium,
+              stesso sfondo della home e una lettura più elegante ma ancora molto chiara da mobile.
+            </p>
+            <div class="mini-meta">
+              <span><i class="fa-solid fa-fish"></i> Cucina di mare</span>
+              <span><i class="fa-solid fa-pizza-slice"></i> Pizzeria</span>
+              <span><i class="fa-solid fa-star"></i> Extra lusso</span>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section class="controls-wrap">
+        <div class="shell controls-card glass-card">
+          <div class="search-box">
+            <i class="fa-solid fa-magnifying-glass"></i>
+            <input
+              id="searchInput"
+              type="text"
+              placeholder="Cerca un piatto, una categoria o un ingrediente..."
+              aria-label="Cerca nel menu"
+            />
+          </div>
+          <div class="categories" id="catContainer"></div>
+        </div>
+      </section>
+
+      <section class="menu-shell">
+        <div class="shell" id="menuContent"></div>
+      </section>
+    </main>
+
+    <footer class="footer">
+      <div class="shell footer-card glass-card">
+        <div class="footer-note">
+          <strong>Coperto e servizio € 2,50</strong>
+          * Prodotto congelato. Per allergeni e dettagli aggiuntivi fare riferimento alla documentazione disponibile in sala.
+        </div>
+        <a class="footer-extra" href="index.html">
+          <i class="fa-solid fa-water"></i>
+          L'Arca note blu
+        </a>
+      </div>
+    </footer>
+
+    <script>
+      const menuData = [
+        { cat: 'Antipasti', name: 'Sautè di cozze', price: '€14,00', desc: 'Cozze fresche.' },
+        { cat: 'Antipasti', name: 'Misto Mare', price: '€15,00', desc: 'Cozze fresche, crostino mare, alici di mare.' },
+        { cat: 'Antipasti', name: 'Insalata di mare tiepida', price: '€15,00', desc: 'Insalata di mare tiepida.' },
+        { cat: 'Antipasti', name: 'Tris di carpacci', price: '€14,00', desc: 'Carpaccio di tonno, salmone e spada.' },
+        { cat: 'Antipasti', name: 'Tagliere toscano', price: '€15,00', desc: 'Affettati e formaggi misti.' },
+        { cat: 'Antipasti', name: 'Antipasto caprese', price: '€12,00', desc: 'Mozzarella di bufala e pomodori.' },
+        { cat: 'Antipasti', name: 'Granfia di Polpo', price: '€18,00', desc: 'Pomodorino, rucola, polpo.' },
+        { cat: 'Antipasti', name: 'Alici alla povera', price: '€12,00', desc: 'Alici con cipolla.' },
+        { cat: 'Antipasti', name: 'Acciughe con burrata', price: '€16,00', desc: 'Acciughe con burrata.' },
+        { cat: 'Antipasti', name: 'Acciughe fritte', price: '€13,00', desc: 'Acciughe fritte.' },
+        { cat: 'Antipasti', name: 'Crostini misti', price: '€8,00', desc: 'Crostini misti.' },
+
+        { cat: 'Primi Piatti', name: 'Spaghetti alla chitarra con vongole veraci', price: '€18,00', desc: 'Spaghetti alla chitarra con vongole veraci.' },
+        { cat: 'Primi Piatti', name: 'Tagliolino allo scoglio', price: '€16,00', desc: 'Totani, gamberetti, cozze e frutti di mare.' },
+        { cat: 'Primi Piatti', name: 'Gnocchetti gamberi e pomodorini', price: '€16,00', desc: 'Gamberi e pomodorini.' },
+        { cat: 'Primi Piatti', name: 'Gnocchetti al pomodoro', price: '€10,00', desc: 'Gnocchetti al pomodoro.' },
+        { cat: 'Primi Piatti', name: 'Lasagne al ragù', price: '€12,00', desc: 'Lasagne con sugo di ragù.' },
+
+        { cat: 'Secondi Piatti', name: 'Frittura di pesce', price: '€18,00', desc: 'Frittura di totani e gamberetti.' },
+        { cat: 'Secondi Piatti', name: 'Grigliata di gamberoni', price: '€18,00', desc: 'Gamberoni alla griglia.' },
+        { cat: 'Secondi Piatti', name: 'Pesce fresco alla griglia (spigola o orata)', price: '€18,00', desc: 'Spigola o orata a scelta.' },
+        { cat: 'Secondi Piatti', name: 'Calamaro alla griglia', price: '€16,00', desc: 'Calamaro grigliato.' },
+        { cat: 'Secondi Piatti', name: 'Pesce spada alla griglia', price: '€18,00', desc: 'Trancio di pesce spada alla griglia.' },
+        { cat: 'Secondi Piatti', name: 'Grigliata mista di pesce sul carbone', price: '€26,00', desc: 'Pesce fresco, trancio di spada, calamaro, gamberoni.' },
+        { cat: 'Secondi Piatti', name: 'Tagliata di manzo', price: '€20,00', desc: 'Filetto con rucola e parmigiano.' },
+        { cat: 'Secondi Piatti', name: 'Zuppa dell\'Arca', price: '€20,00', desc: 'Zuppa di mare della casa.' },
+
+        { cat: 'Contorni ed Insalate', name: 'Patate fritte', price: '€6,00', desc: 'Patate fritte.' },
+        { cat: 'Contorni ed Insalate', name: 'Insalata mista', price: '€6,00', desc: 'Insalata verde, pomodori e carote.' },
+        { cat: 'Contorni ed Insalate', name: 'Insalata di pomodori', price: '€6,00', desc: 'Pomodori freschi.' },
+        { cat: 'Contorni ed Insalate', name: 'Finocchi agli agrumi', price: '€6,00', desc: 'Finocchi agli agrumi.' },
+        { cat: 'Contorni ed Insalate', name: 'Insalata di verza', price: '€6,00', desc: 'Insalata di verza.' },
+        { cat: 'Contorni ed Insalate', name: 'Anelli di cipolla fritti', price: '€7,00', desc: 'Anelli di cipolla fritti.' },
+
+        { cat: 'Pizze Rosse', name: 'Margherita', price: '€8,00', desc: 'Pomodoro e mozzarella.' },
+        { cat: 'Pizze Rosse', name: 'Marinara', price: '€7,00', desc: 'Pomodoro, aglio e origano.' },
+        { cat: 'Pizze Rosse', name: 'Napoli', price: '€10,00', desc: 'Pomodoro, mozzarella, capperi e acciughe.' },
+        { cat: 'Pizze Rosse', name: '4 stagioni', price: '€12,00', desc: 'Pomodoro, mozzarella, funghi, prosciutto cotto, carciofini e olive.' },
+        { cat: 'Pizze Rosse', name: 'Diavola', price: '€10,00', desc: 'Pomodoro, mozzarella, salamino piccante.' },
+        { cat: 'Pizze Rosse', name: 'Cotto e funghi', price: '€10,00', desc: 'Pomodoro, mozzarella, funghi e prosciutto cotto.' },
+        { cat: 'Pizze Rosse', name: 'Salsiccia', price: '€10,00', desc: 'Pomodoro, mozzarella e salsiccia.' },
+        { cat: 'Pizze Rosse', name: 'Tonno e cipolla', price: '€10,00', desc: 'Pomodoro, mozzarella, tonno e cipolla.' },
+        { cat: 'Pizze Rosse', name: 'Bufala', price: '€12,00', desc: 'Pomodoro e mozzarella di bufala.' },
+        { cat: 'Pizze Rosse', name: 'Wurstel e patatine', price: '€10,00', desc: 'Pomodoro, mozzarella, wurstel e patatine fritte.' },
+
+        { cat: 'Pizze Bianche', name: 'Schiaccino olio e sale', price: '€6,00', desc: 'Base bianca con olio e sale.' },
+        { cat: 'Pizze Bianche', name: 'Caprese', price: '€10,00', desc: 'Pomodoro a fette, mozzarella e basilico.' },
+        { cat: 'Pizze Bianche', name: 'Quattro formaggi', price: '€12,00', desc: 'Mozzarella, gorgonzola, mascarpone e sottiletta.' },
+        { cat: 'Pizze Bianche', name: 'Valdostana', price: '€12,00', desc: 'Mozzarella e prosciutto crudo.' },
+        { cat: 'Pizze Bianche', name: 'Vegetariana', price: '€12,00', desc: 'Mozzarella, zucchine, melanzane e pomodoro pachino.' },
+
+        { cat: 'Dolci Artigianali', name: 'Crema di mascarpone con lingue di gatto', price: '€6,00', desc: 'Crema di mascarpone di nostra produzione.' },
+        { cat: 'Dolci Artigianali', name: 'Dolce del giorno', price: '€6,00', desc: 'Dessert del giorno.' },
+        { cat: 'Dolci Artigianali', name: 'Crema fredda al caffè', price: '€6,00', desc: 'Crema fredda al caffè.' },
+        { cat: 'Dolci Artigianali', name: 'Sorbetto al limone', price: '€5,00', desc: 'Sorbetto al limone.' },
+        { cat: 'Dolci Artigianali', name: 'Sgroppino', price: '€6,00', desc: 'Sorbetto al limone e vodka.' },
+        { cat: 'Dolci Artigianali', name: 'Cantucci e Vin Santo', price: '€6,00', desc: 'Cantucci con Vin Santo.' },
+
+        { cat: 'Bevande', name: 'Birra alla spina (40 cl)', price: '€5,00', desc: 'Moretti Baffo Oro.' },
+        { cat: 'Bevande', name: 'Birra in bottiglia (33 cl)', price: '€5,00', desc: 'Corona, Leffe Rouge, Peroni Capri, Ichnusa non filtrata, Peroni Zero.' },
+        { cat: 'Bevande', name: 'Bevande in lattina (33 cl)', price: '€3,50', desc: 'Coca Cola, Coca Zero, Fanta, Sprite, tè pesca o limone, succhi di frutta.' },
+        { cat: 'Bevande', name: 'Acqua naturale o gassata (75 cl)', price: '€2,50', desc: 'Acqua naturale o gassata.' },
+        { cat: 'Bevande', name: 'Caffè', price: '€2,00', desc: 'Caffè espresso.' },
+        { cat: 'Bevande', name: 'Amari', price: '€5,00', desc: 'Amari.' },
+        { cat: 'Bevande', name: 'Grappa', price: '€4,00', desc: 'Grappa.' },
+        { cat: 'Bevande', name: 'Superalcolici', price: '€7,00', desc: 'Superalcolici.' }
+      ];
+
+      const order = [
+        'Antipasti',
+        'Primi Piatti',
+        'Secondi Piatti',
+        'Contorni ed Insalate',
+        'Pizze Rosse',
+        'Pizze Bianche',
+        'Dolci Artigianali',
+        'Bevande'
+      ];
+
+      const sectionNotes = {
+        'Pizze Bianche': 'Aggiunte speciali: € 1,50 · doppia mozzarella € 1,00 · mozzarella di bufala € 2,00.'
+      };
+
+      let currentCategory = 'all';
+
+      function buildCategories() {
+        const catContainer = document.getElementById('catContainer');
+        catContainer.innerHTML = '';
+
+        const allButton = createCategoryButton('Tutti', 'all');
+        allButton.classList.add('active');
+        catContainer.appendChild(allButton);
+
+        order.forEach((category) => {
+          catContainer.appendChild(createCategoryButton(category, category));
+        });
+      }
+
+      function createCategoryButton(label, value) {
+        const button = document.createElement('button');
+        button.type = 'button';
+        button.className = 'cat-btn';
+        button.textContent = label;
+        button.addEventListener('click', () => {
+          currentCategory = value;
+          document.querySelectorAll('.cat-btn').forEach((btn) => btn.classList.remove('active'));
+          button.classList.add('active');
+          filterMenu();
+        });
+        return button;
+      }
+
+      function normalize(value) {
+        return value.toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g, '');
+      }
+
+      function filterMenu() {
+        const query = normalize(document.getElementById('searchInput').value.trim());
+        const filtered = menuData.filter((item) => {
+          const haystack = normalize([item.cat, item.name, item.desc, item.price].join(' '));
+          const matchesSearch = haystack.includes(query);
+          const matchesCategory = currentCategory === 'all' || item.cat === currentCategory;
+          return matchesSearch && matchesCategory;
+        });
+
+        renderMenu(filtered);
+      }
+
+      function renderMenu(items) {
+        const container = document.getElementById('menuContent');
+        container.innerHTML = '';
+
+        if (!items.length) {
+          container.innerHTML = '<div class="glass-card empty-state">Nessun risultato trovato. Prova con un altro termine o cambia categoria.</div>';
+          return;
+        }
+
+        order.forEach((category) => {
+          const categoryItems = items.filter((item) => item.cat === category);
+          if (!categoryItems.length) {
+            return;
+          }
+
+          const section = document.createElement('section');
+          section.className = 'menu-section glass-card';
+          section.id = category.toLowerCase().replace(/[^a-z0-9]+/gi, '-');
+
+          const title = document.createElement('h2');
+          title.className = 'section-title';
+          title.textContent = category;
+          section.appendChild(title);
+
+          const grid = document.createElement('div');
+          grid.className = 'menu-grid';
+
+          categoryItems.forEach((item) => {
+            const card = document.createElement('article');
+            card.className = 'menu-item';
+            card.innerHTML = `
+              <div class="item-head">
+                <div class="item-name">${item.name}</div>
+                <div class="item-dots"></div>
+                <div class="item-price">${item.price}</div>
+              </div>
+              <p class="item-desc">${item.desc}</p>
+            `;
+            grid.appendChild(card);
+          });
+
+          section.appendChild(grid);
+
+          if (sectionNotes[category]) {
+            const note = document.createElement('p');
+            note.className = 'section-note';
+            note.textContent = sectionNotes[category];
+            section.appendChild(note);
+          }
+
+          container.appendChild(section);
+        });
+      }
+
+      buildCategories();
+      renderMenu(menuData);
+
+      document.getElementById('searchInput').addEventListener('input', filterMenu);
+    </script>
+  </body>
 </html>
